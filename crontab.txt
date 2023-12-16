@@ -1,6 +1,6 @@
 # Add cronjobs to /etc/crontab
 
-X X X X X sudo sh /home/rlksvrlogs/scripts/remove/rmvoldlogs.sh > /dev/null 2>&1
-X X X X X sudo sh /home/rlksvrlogs/scripts/remove/rmvtemp.sh > /dev/null 2>&1
+X X X X X sudo sh /home/sample/scripts/remove/rmvoldlogs.sh > /dev/null 2>&1
+X X X X X sudo sh /home/sample/scripts/remove/rmvtemp.sh > /dev/null 2>&1
 
-X X X X X sudo sh /home/rlksvrlogs/scripts/errorlogwatch/errorlogwatch.sh > /dev/null 2>&1
+X X X X X sudo sh /home/sample/scripts/errorlogwatch/errorlogwatch.sh > /dev/null 2>&1
