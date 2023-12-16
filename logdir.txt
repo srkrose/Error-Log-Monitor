@@ -1,4 +1,5 @@
 dnszone
 errorlogwatch
+logs
 mail
 temp
