@@ -3,7 +3,7 @@
 source /home/sample/scripts/dataset.sh
 
 function cronjob_list() {
-	cat /var/spool/cron/* | grep -v "SHELL=\|MAILTO=" | awk '{if ($1=="*" || $1=="*/1" || $1=="*/2" || $1=="*/3" || $1=="*/4" || $1=="*/5" || $1=="*/6" || $1=="*/7" || $1=="*/8"|| $1=="*/9" || $1=="*/10" || $1=="*/11" || $1=="*/12" || $1=="*/13" || $1=="*/14") print $0}' | grep -v "/cpuloadalert.sh\|/dcpumon-wrapper\|/lscache -type\|/lincolk/\|/mahawat1/" >>$temp/cronjob_$time.txt
+	cat /var/spool/cron/* | grep -v "SHELL=\|MAILTO=" | awk '{if ($1=="*" || $1=="*/1" || $1=="*/2" || $1=="*/3" || $1=="*/4" || $1=="*/5" || $1=="*/6" || $1=="*/7" || $1=="*/8"|| $1=="*/9" || $1=="*/10" || $1=="*/11" || $1=="*/12" || $1=="*/13" || $1=="*/14") print $0}' | grep -v "/cpuloadalert.sh\|/dcpumon-wrapper\|/lscache -type" >>$temp/cronjob_$time.txt
 }
 
 function check_log() {
