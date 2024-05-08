@@ -337,6 +337,22 @@ function ext_index() {
 	printf "\n************************************************************\n" >>$svrlogs/errorlogwatch/errorlogwatch_$time.txt
 }
 
+function bot_log() {
+	printf "\n# *** BOT Request ***\n\n" >>$svrlogs/errorlogwatch/errorlogwatch_$time.txt
+
+	sh $scripts/errorlogwatch/botlog.sh
+
+	botlog=($(find $svrlogs/errorlogwatch -type f -name "botlog*" -exec ls -lat {} + | grep "$(date +"%F_%H:")" | head -1 | awk '{print $NF}'))
+
+	if [[ ! -z $botlog ]]; then
+		echo "$(cat $botlog)" >>$svrlogs/errorlogwatch/errorlogwatch_$time.txt
+	else
+		printf "No BOT requests found\n" >>$svrlogs/errorlogwatch/errorlogwatch_$time.txt
+	fi
+
+	printf "\n************************************************************\n" >>$svrlogs/errorlogwatch/errorlogwatch_$time.txt
+}
+
 function send_mail() {
 	sh $scripts/errorlogwatch/elwmail.sh
 }
@@ -352,6 +368,8 @@ logindefer_log
 ssh_log
 
 apache_log
+
+bot_log
 
 exim_log
 
@@ -369,9 +387,9 @@ lve_kill
 
 ext_index
 
-cperror_log
-
 dbgovernor_log
+
+cperror_log
 
 phpfpm_log
 
