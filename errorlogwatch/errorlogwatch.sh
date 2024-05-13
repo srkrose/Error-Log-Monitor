@@ -339,10 +339,8 @@ function ext_index() {
 
 function bot_log() {
 	printf "\n# *** BOT Request ***\n\n" >>$svrlogs/errorlogwatch/errorlogwatch_$time.txt
-
-	sh $scripts/errorlogwatch/botlog.sh
-
-	botlog=($(find $svrlogs/errorlogwatch -type f -name "botlog*" -exec ls -lat {} + | grep "$(date +"%F_%H:")" | head -1 | awk '{print $NF}'))
+	
+	botlog=($(find $svrlogs/errorlogwatch -type f -name "botlog*" -exec ls -lat {} + | grep "$(date -d '15 minutes ago' +"%F_%H:")" | head -1 | awk '{print $NF}'))
 
 	if [[ ! -z $botlog ]]; then
 		echo "$(cat $botlog)" >>$svrlogs/errorlogwatch/errorlogwatch_$time.txt
