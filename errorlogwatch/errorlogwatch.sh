@@ -351,6 +351,22 @@ function bot_log() {
 	printf "\n************************************************************\n" >>$svrlogs/errorlogwatch/errorlogwatch_$time.txt
 }
 
+function cpupdate_log() {
+	printf "\n# *** WHM Version Update Log ***\n\n" >>$svrlogs/errorlogwatch/errorlogwatch_$time.txt
+
+	sh $scripts/errorlogwatch/cpupdatelog.sh
+
+	cpupdatelog=($(find $svrlogs/errorlogwatch -type f -name "cpupdatelog*" -exec ls -lat {} + | grep "$(date +"%F_%H:")" | head -1 | awk '{print $NF}'))
+
+	if [[ ! -z $cpupdatelog ]]; then
+		echo "$(cat $cpupdatelog)" >>$svrlogs/errorlogwatch/errorlogwatch_$time.txt
+	else
+		printf "No new version updates\n" >>$svrlogs/errorlogwatch/errorlogwatch_$time.txt
+	fi
+
+	printf "\n************************************************************\n" >>$svrlogs/errorlogwatch/errorlogwatch_$time.txt
+}
+
 function send_mail() {
 	sh $scripts/errorlogwatch/elwmail.sh
 }
@@ -364,6 +380,8 @@ last_log
 logindefer_log
 
 ssh_log
+
+cpupdate_log
 
 apache_log
 
